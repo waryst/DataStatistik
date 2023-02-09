@@ -1,0 +1,1 @@
+[21-Feb-2022 06:06:03 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.2.5". You are running 7.1.33. in /home/adatik/system/vendor/composer/platform_check.php on line 24
