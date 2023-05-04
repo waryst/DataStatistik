@@ -31,7 +31,7 @@
     <!-- quform css -->
     <link rel="stylesheet" href="{{ asset('assets') }}/quform/css/base.css">
     <style>
-   
+
     </style>
 
     <!-- theme core css -->

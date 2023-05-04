@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Traits\GetNavTraits;
 use Illuminate\Http\Request;
 use App\models\DataStatistik;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
@@ -489,5 +490,17 @@ class DashboardAdminController extends Controller
             $pencarian_data->delete();
             return redirect('/statistik')->with('success', 'Proses Hapus data sudah berhasil!');
         }
+    }
+    public function unverified()
+    {
+        $data['nav'] =$this->getnav();
+        $data['hasil'] = DB::table('data_statistik')
+                ->join('instansi', 'data_statistik.instansi_id', '=', 'instansi.id')
+                ->select('instansi.description',DB::raw('COUNT(data_statistik.verifikator) as data'))
+                ->whereIN('data_statistik.verifikator',['0','3'])
+                ->orderby('data_statistik.instansi_id','DESC')
+                ->groupBy('data_statistik.instansi_id')
+                ->get();
+        return view('adminweb.unverified', $data);
     }
 }

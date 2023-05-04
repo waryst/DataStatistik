@@ -13,6 +13,18 @@ Route::get('file/{id_file}', function ($id_file)
     $datafile = $caridatasets->firstWhere('id',$id_file);
     $dinasnya=($datafile->instansi_id);
     $filenya=($datafile->file);
+        $datafile->download =$datafile->download + 1;
+        $datafile->save();
+    $nama_file=preg_replace("/[^a-zA-Z0-9 ]/", "-", $datafile->title);
+    return response()->download(storage_path('app/public/data/'.$dinasnya.'/'.$filenya),$nama_file.".".$datafile->type);
+
+});
+Route::get('view/{id_file}', function ($id_file)
+{
+    $caridatasets=DataStatistik::all();
+    $datafile = $caridatasets->firstWhere('id',$id_file);
+    $dinasnya=($datafile->instansi_id);
+    $filenya=($datafile->file);
     $nama_file=preg_replace("/[^a-zA-Z0-9 ]/", "-", $datafile->title);
     return response()->download(storage_path('app/public/data/'.$dinasnya.'/'.$filenya),$nama_file.".".$datafile->type);
 
@@ -109,6 +121,7 @@ Route::group(['middleware' => ['auth', 'checkRole:administrator', 'revalidate']]
     Route::get('/data_publikasi/{id}', 'Adminweb\PublikAdminController@show');
     Route::post('/data_publikasi/{id}', 'Adminweb\PublikAdminController@edit');
     Route::delete('/data_publikasi/{id}', 'Adminweb\PublikAdminController@hapus');
+    Route::get('/unverified', 'Adminweb\DashboardAdminController@unverified');
 
     Route::get('/visualisasi_data', 'Adminweb\VisualAdminController@data_visualisasi');
     Route::get('/visualisasi_data/create', 'Adminweb\VisualAdminController@createvisual');

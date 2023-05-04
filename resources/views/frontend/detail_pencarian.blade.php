@@ -14,15 +14,14 @@
         <div class="mx-auto text-center">
             <div class="mx-auto text-center">
                 <embed type="text/html"
-                    src="https://view.officeapps.live.com/op/embed.aspx?src={{ url('/file/'.$datasets->id .'/')}}"
+                    src="https://view.officeapps.live.com/op/embed.aspx?src={{ url('/view/' . $datasets->id . '/') }}"
                     width="1024" height="350">
             </div>
-        </div> 
-       
+        </div>
     @elseif ($datasets->type == 'csv' or $datasets->type == 'pdf')
         <div class="mx-auto text-center">
             <embed type="text/html"
-                src="https://docs.google.com/gview?url={{ url('/file/'.$datasets->id .'/') }}&embedded=true"
+                src="https://docs.google.com/gview?url={{ url('/view/' . $datasets->id . '/') }}&embedded=true"
                 width="1024" height="350">
         </div>
     @endif

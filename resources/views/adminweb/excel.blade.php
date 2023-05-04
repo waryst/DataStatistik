@@ -9,14 +9,49 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-gray-dark">
-
-
                         @if (auth()->user()->role == 'administrator')
                             <div class="card-header">
                                 <h3 class="card-title">Data Statistik</h3>
                             </div>
                             <div class="card-body">
-                                
+                                <div class="row">
+                                    <div class="col-12 col-sm-6 col-md-4">
+                                        <div class="info-box mb-3">
+                                            <span class="info-box-icon bg-success elevation-1">
+                                                <i class="fas fa-chart-pie"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Jumlah Data Valid</span>
+                                                <span class="info-box-number">{{ $nav['data_valid'] }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-4">
+                                        <a href="{{ url('/verifikasi') }}">
+                                            <div class="info-box mb-3">
+                                                <span class="info-box-icon bg-warning elevation-1">
+                                                    <i class="fas fa-chart-pie"></i></span>
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Jumlah Data Belum Tervalidasi</span>
+                                                    <span class="info-box-number">{{ $nav['jumlah_validasi_all'] }}</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="clearfix hidden-md-up"></div>
+
+                                    <div class="col-12 col-sm-6 col-md-4">
+                                        <a href="{{ url('/unverified') }}">
+                                            <div class="info-box mb-3">
+                                                <span class="info-box-icon bg-danger elevation-1">
+                                                    <i class="fas fa-chart-pie"></i></span>
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text ">Jumlah Data Belum Terverifikasi</span>
+                                                    <span class="info-box-number">{{ $nav['data_unverified'] }}</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
                             @else
                                 <div class="card-header">
                                     <h3 class="card-title">Entry Data Statistik</h3>
@@ -81,11 +116,11 @@
                                                             @endif
                                                         </h3>
                                                         <div class="timeline-body text-wrap">
-                                                            {!! $data_statistik->description !!}
+                                                            {!! str_replace('style', '', $data_statistik->description) !!}
                                                             @if (auth()->user()->role == 'administrator')
-                                                            <br>
-                                                                <strong>Status Data :</strong> 
-                                                                @if ($data_statistik->status==1)
+                                                                <br>
+                                                                <strong>Status Data :</strong>
+                                                                @if ($data_statistik->status == 1)
                                                                     Data Publik
                                                                 @else
                                                                     Data Private
@@ -93,6 +128,10 @@
                                                                 <br>
                                                                 <strong>Tipe File :</strong> {!! $data_statistik->type !!}
                                                             @endif
+                                                            <p class="mt-2">
+                                                                <strong>Viewer :</strong> {{ $data_statistik->view }}
+                                                                <strong> | Download :</strong>
+                                                                {{ $data_statistik->download }}
                                                         </div>
                                                         @if (auth()->user()->role == 'administrator')
                                                             <div class="timeline-footer">
@@ -100,8 +139,7 @@
                                                                     action="/file/{{ $data_statistik->id }}">
                                                                     {{ csrf_field() }}
                                                                     <button style="border: none" type="submit"
-                                                                        class="btn btn-success btn-sm py-1"
-                                                                        name="download">
+                                                                        class="btn btn-success btn-sm py-1" name="download">
                                                                         <i class="fas fa-cloud-download-alt"></i>
                                                                         Download
                                                                     </button>
@@ -122,8 +160,7 @@
                                                                             name="show" value="show"><i
                                                                                 class="fas fa-eye p-1"></i>
                                                                             Public </button>
-                                                                        <button
-                                                                            class="btn bg-info btn-sm loading-simpan"
+                                                                        <button class="btn bg-info btn-sm loading-simpan"
                                                                             id='loading-simpan{{ $data_statistik->id }}'
                                                                             data-id='{{ $data_statistik->id }}'>
                                                                             <div class="spinner"><i role="status"
@@ -166,8 +203,7 @@
                                                                 </a>
                                                                 <form
                                                                     action="{{ url('statistik/' . $data_statistik->id) }}"
-                                                                    method="POST"
-                                                                    id='delete{{ $data_statistik->id }}'
+                                                                    method="POST" id='delete{{ $data_statistik->id }}'
                                                                     class="d-inline">
                                                                     @method('delete')
                                                                     @csrf
@@ -316,7 +352,7 @@
         $(document).ready(function() {
             bsCustomFileInput.init();
         });
-                $(function() {
+        $(function() {
             // Summernote
             $('#deskripsi').summernote({
                 disableDragAndDrop: true,

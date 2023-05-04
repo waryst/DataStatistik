@@ -49,6 +49,8 @@ class InstansiController extends Controller
     {
         $caridatasets=DataStatistik::all();
         $data['datasets'] = $caridatasets->firstWhere('id', $resource);
+        $data['datasets']->view =$data['datasets']->view + 1;
+        $data['datasets']->save();
         return view('frontend.detail_pencarian',$data);
     }
     public function datasets()
