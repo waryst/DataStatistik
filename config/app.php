@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
     ],
 
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
 
     ],
 

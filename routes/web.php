@@ -76,6 +76,7 @@ Route::get('/instansi/{dinas}', 'Frontend\InstansiController@index');
 Route::get('/data/lihatdata/{resource}', 'Frontend\InstansiController@detail')->name('detail');
 Route::get('/lihat', 'Frontend\InstansiController@detail_lihat');
 Route::get('/datasets', 'Frontend\InstansiController@datasets');
+Route::get('/datasets/json/', 'Frontend\InstansiController@json');
 Route::get('/instansi', 'Frontend\InstansiController@instansi');
 Route::get('/publikasi', 'Frontend\InstansiController@datapublikasi');
 Route::get('/login', 'Auth\AuthController@index')->name('login')->middleware('revalidate');
@@ -126,8 +127,11 @@ Route::group(['middleware' => ['auth', 'checkRole:administrator', 'revalidate']]
     Route::get('/visualisasi_data', 'Adminweb\VisualAdminController@data_visualisasi');
     Route::get('/visualisasi_data/create', 'Adminweb\VisualAdminController@createvisual');
     Route::post('/visualisasi_data/post', 'Adminweb\VisualAdminController@postvisual');
+    Route::get('/edit_visualisasi/{id}', 'Adminweb\VisualAdminController@show');
     Route::put('/visualisasi_data/{slug}', 'Adminweb\VisualAdminController@updatevisual');
     Route::delete('/visualisasi_data/{slug}', 'Adminweb\VisualAdminController@destroy');
+    Route::get('/indikator', 'Adminweb\IndikatorController@index');
+
 
 });
 

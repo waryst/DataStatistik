@@ -19,7 +19,6 @@
     <link rel="apple-touch-icon" href="{{ asset('assets') }}/img/logos/apple-touch-icon-57x57.png" />
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('assets') }}/img/logos/apple-touch-icon-72x72.png" />
     <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('assets') }}/img/logos/apple-touch-icon-114x114.png" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"></script>
     <link rel="stylesheet" href="{{ asset('assets') }}/css/dataTables.min.css" />
 
     <!-- plugins -->
@@ -30,6 +29,7 @@
 
     <!-- quform css -->
     <link rel="stylesheet" href="{{ asset('assets') }}/quform/css/base.css">
+
     <style>
 
     </style>
@@ -141,7 +141,7 @@
     <!-- all js include end -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 
-
+    <link href="https://cdn.datatables.net/v/bs/dt-1.13.5/datatables.min.css" rel="stylesheet" />
     <script src="{{ asset('asset_adminweb') }}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{ asset('asset_adminweb') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="{{ asset('asset_adminweb') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -159,22 +159,24 @@
                     "autoWidth": false,
                     "responsive": true,
                 });
-                $('#tb_statistik').DataTable({
-                    "paging": true,
-                    "lengthChange": true,
-                    "searching": true,
-                    "ordering": false,
-                    "columnDefs": [{
-                        "targets": [0], //first column / numbering column
-                        "orderable": false, //set not orderable
-                    }, ],
-                    "info": true,
-                    "autoWidth": true,
-                    "responsive": true,
-                });
+                // $('#tb_statistik').DataTable({
+
+                // "paging": true,
+                // "lengthChange": true,
+                // "searching": true,
+                // "ordering": false,
+                // "columnDefs": [{
+                // "targets": [0], //first column / numbering column
+                // "orderable": false, //set not orderable
+                // }, ],
+                // "info": true,
+                // "autoWidth": true,
+                // "responsive": true,
+                // });
             });
         });
     </script>
+    @stack('java')
 </body>
 
 </html>

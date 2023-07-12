@@ -72,9 +72,11 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div id="accordion" class="accordion-style01">
+                    <div id="accordion" class="accordion-style01 p-3">
                         <table id="tb_statistik" name="tb_statistik" class="table">
-                            @foreach ($datasets as $data)
+
+
+                            {{-- @foreach ($datasets as $data)
                                 <tr>
                                     <td class="p-0">
                                         <div class="card">
@@ -144,14 +146,13 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @endforeach --}}
                         </table>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -186,3 +187,22 @@
     </script>
     @include('partials.mainfooter')
 @endsection
+@push('java')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(function() {
+                $('#tb_statistik').DataTable({
+                    paging: true,
+                    serverSide: true,
+                    processing: true,
+                    ajax: 'datasets/json',
+                    columns: [{
+                        data: 'opsi',
+                        name: 'opsi'
+                    }, ],
+
+                });
+            });
+        });
+    </script>
+@endpush

@@ -91,10 +91,10 @@
                             <i class="fas fa-copy"></i>
                             <p>
                                 @if (auth()->user()->role == 'administrator')
-                                    Validasi Data                                    
+                                    Validasi Data
                                     <span class="badge badge-danger right">{{ $nav['jumlah_validasi_all'] }}</span>
                                 @elseif (auth()->user()->role == 'verifikator')
-                                    Varifikasi Data                                
+                                    Varifikasi Data
                                     <span class="badge badge-danger right">{{ $nav['jumlah_validasi_all'] }}</span>
                                 @endif
                             </p>
@@ -130,7 +130,7 @@
                         </li>
                     @elseif (auth()->user()->role == 'verifikator')
                         <li class="nav-item">
-                            <a href="{{ url('data_instansi/daftar_user/'.auth()->user()->instansi->name) }}"
+                            <a href="{{ url('data_instansi/daftar_user/' . auth()->user()->instansi->name) }}"
                                 class="nav-link {{ request()->is('data_instansi/*') ? 'active' : '' }}">
                                 <i class="fas fa-users"></i>
                                 <p>
@@ -140,6 +140,29 @@
                         </li>
                     @endif
 
+                </ul>
+            </li>
+        @endif
+        @if (auth()->user()->role == 'administrator')
+            <li class="nav-item menu-open">
+                <a href="#"
+                    class="nav-link {{ request()->is('statistik') ? 'active' : '' }}  {{ request()->is('verifikasi') ? 'active' : '' }}  {{ request()->is('visualisasi_data') ? 'active' : '' }}
+                    {{ request()->is('data_instansi') ? 'active' : '' }} {{ request()->is('data_instansi/*') ? 'active' : '' }}">
+                    <p>
+                        Master Data
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    @if (auth()->user()->role == 'administrator')
+                        <li class="nav-item ">
+                            <a href="{{ url('/indikator') }}"
+                                class="nav-link {{ request()->is('indikator') ? 'active' : '' }}">
+                                <i class=" fas fa-table"></i>
+                                <p> Indikator IKU dan IKD </p>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif

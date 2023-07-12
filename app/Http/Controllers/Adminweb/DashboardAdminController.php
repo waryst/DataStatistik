@@ -420,6 +420,7 @@ class DashboardAdminController extends Controller
                         'private'=>$status,
                         ]; 
                         $result=self::get_curl('package_create',$post);
+                        // dd($result);
                         if($result['success']==true){
                             $pencarian_data->id_package = $result['result']['id'];
                             $pencarian_data->save();  

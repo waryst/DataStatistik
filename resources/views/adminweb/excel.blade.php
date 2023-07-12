@@ -135,6 +135,17 @@
                                                         </div>
                                                         @if (auth()->user()->role == 'administrator')
                                                             <div class="timeline-footer">
+                                                                @if ($data_statistik->type == 'xls' or $data_statistik->type == 'xlsx')
+                                                                    <a href="https://view.officeapps.live.com/op/embed.aspx?src={{ url('/file/' . $data_statistik->id . '/') }}"
+                                                                        target="_blank" style="border: none"
+                                                                        class="btn btn-info btn-sm my-1"><i
+                                                                            class="fas fa-binoculars"></i> View</a>
+                                                                @elseif ($data_statistik->type == 'csv' or $data_statistik->type == 'pdf')
+                                                                    <a href="https://docs.google.com/gview?url={{ url('/file/' . $data_statistik->id) }}&embedded=true"
+                                                                        target="_blank" style="border: none"
+                                                                        class="btn btn-info btn-sm my-1"><i
+                                                                            class="fas fa-binoculars"></i> View</a>
+                                                                @endif
                                                                 <form class="d-inline"
                                                                     action="/file/{{ $data_statistik->id }}">
                                                                     {{ csrf_field() }}
