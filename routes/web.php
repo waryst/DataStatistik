@@ -4,9 +4,7 @@ use App\models\Dashboard;
 use App\models\DataPublic;
 use App\models\Visualisasi;
 use App\models\DataStatistik;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Response;
 Route::get('file/{id_file}', function ($id_file)
 {
     $caridatasets=DataStatistik::all();
