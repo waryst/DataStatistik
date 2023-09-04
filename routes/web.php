@@ -17,16 +17,16 @@ Route::get('file/{id_file}', function ($id_file)
     return response()->download(storage_path('app/public/data/'.$dinasnya.'/'.$filenya),$nama_file.".".$datafile->type);
 
 });
-Route::get('view/{id_file}', function ($id_file)
-{
-    $caridatasets=DataStatistik::all();
-    $datafile = $caridatasets->firstWhere('id',$id_file);
-    $dinasnya=($datafile->instansi_id);
-    $filenya=($datafile->file);
-    $nama_file=preg_replace("/[^a-zA-Z0-9 ]/", "-", $datafile->title);
-    return response()->download(storage_path('app/public/data/'.$dinasnya.'/'.$filenya),$nama_file.".".$datafile->type);
+// Route::get('view/{id_file}', function ($id_file)
+// {
+//     $caridatasets=DataStatistik::all();
+//     $datafile = $caridatasets->firstWhere('id',$id_file);
+//     $dinasnya=($datafile->instansi_id);
+//     $filenya=($datafile->file);
+//     $nama_file=preg_replace("/[^a-zA-Z0-9 ]/", "-", $datafile->title);
+//     return response()->download(storage_path('app/public/data/'.$dinasnya.'/'.$filenya),$nama_file.".".$datafile->type);
 
-});
+// });
 Route::get('public/{id_file}/{data}', function ($id_file)
 {
     $caridatapublik=DataPublic::all();
