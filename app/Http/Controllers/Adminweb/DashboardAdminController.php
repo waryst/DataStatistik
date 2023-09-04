@@ -79,12 +79,13 @@ class DashboardAdminController extends Controller
         $request->validate([
             'title' => 'required',
             'deskripsi' =>'required',
-            'file' => 'required|mimes:csv,txt,xlsx,xls,pdf|max:5120'
+            'file' => 'required|mimes:csv,txt,xlsx,xls,pdf'
+            // 'file' => 'required|mimes:csv,txt,xlsx,xls,pdf|max:5120'
         ],
         [
             'title.required' => 'Judul Data Harus Di Isi',
             'deskripsi.required' => 'Deskripsi Data Harus Di Isi',
-            'file.max' => 'Ukuran File Maksimal 5 Mbps',
+            // 'file.max' => 'Ukuran File Maksimal 5 Mbps',
         ]);
         $file = $request->file('file');
         $filename = Str::slug($request->title, '-')."-".time(). "." . $request->file('file')->getClientOriginalExtension();      
@@ -420,7 +421,6 @@ class DashboardAdminController extends Controller
                         'private'=>$status,
                         ]; 
                         $result=self::get_curl('package_create',$post);
-                        // dd($result);
                         if($result['success']==true){
                             $pencarian_data->id_package = $result['result']['id'];
                             $pencarian_data->save();  

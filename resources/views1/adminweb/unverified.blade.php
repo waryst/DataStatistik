@@ -17,9 +17,9 @@
                             <table id="datatable" name="datatable" class="table text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th class="text-center" style="width:5%">No</th>
+                                        <th class="text-center">No</th>
                                         <th>Nama Dinas</th>
-                                        <th class="text-center text-wrap" style="width:10%">Jumlah Data</th>
+                                        <th class="text-center">Jumlah Data</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -28,7 +28,7 @@
                                             <td class="text-center">
                                                 {{ $loop->iteration }}
                                             </td>
-                                            <td class="text-wrap">
+                                            <td>
                                                 {{ $hasil->description }}
                                             </td>
                                             <td class="text-center">

@@ -47,8 +47,8 @@
                                                             value="unshow"><i class="fas fa-eye-slash p-1"></i></button>
                                                     @endif
                                                 </form>
-                                                <a href="/adminweb/news/{{ $news->slug }}/edit"
-                                                    class="badge bg-warning"><i class="far fa-edit p-1"></i>
+                                                <a href="/edit_visualisasi/{{ $news->id }}" class="badge bg-warning"><i
+                                                        class="far fa-edit p-1"></i>
                                                 </a>
                                                 <form action="/visualisasi_data/{{ $news->slug }}" method="post"
                                                     class="d-inline" id='delete{{ $news->slug }}'>

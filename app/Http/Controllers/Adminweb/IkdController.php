@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Adminweb;
 
 use App\Http\Controllers\Controller;
 use App\models\Ikd;
+use App\Traits\GetNavTraits;
 use Illuminate\Http\Request;
 
 class IkdController extends Controller

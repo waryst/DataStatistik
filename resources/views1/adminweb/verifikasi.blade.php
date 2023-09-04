@@ -8,117 +8,119 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                <div class="card card-gray-dark">
-                    @if (auth()->user()->role == 'administrator')
-                        <div class="card-header">
-                            <h3 class="card-title">Validasi Data Statistik</h3>
-                        </div>
-                        <div class="card-body">
-                        @else
+                    <div class="card card-gray-dark">
+                        @if (auth()->user()->role == 'administrator')
                             <div class="card-header">
-                                <h3 class="card-title">Verifikasi Data Statistik</h3>
+                                <h3 class="card-title">Validasi Data Statistik</h3>
                             </div>
                             <div class="card-body">
-                    @endif    
-                            <table id="datatable" name="datatable" class="table text-nowrap">
-                                <tbody>
-                                    @foreach ($hasil as $hasil)
-                                        <tr>
-                                            <td>
-                                                <div class="timeline py-2" style="margin:-30px -20px 0 -20px">
-                                                    <div>
-                                                        <div class="timeline-item ">
-                                                            <span class="time d-none d-sm-block"><i class="fas fa-clock"></i>
-                                                                Created {{ $hasil->created_at }}</span>
-                                                            <span class="time d-none d-sm-block"><i class="fas fa-clock"></i>
-                                                                Updated {{ $hasil->updated_at }}</span>
+                            @else
+                                <div class="card-header">
+                                    <h3 class="card-title">Verifikasi Data Statistik</h3>
+                                </div>
+                                <div class="card-body">
+                        @endif
+                        <table id="datatable" name="datatable" class="table text-nowrap">
+                            <tbody>
+                                @foreach ($hasil as $hasil)
+                                    <tr>
+                                        <td>
+                                            <div class="timeline py-2" style="margin:-30px -20px 0 -20px">
+                                                <div>
+                                                    <div class="timeline-item ">
+                                                        <span class="time d-none d-sm-block"><i class="fas fa-clock"></i>
+                                                            Created {{ $hasil->created_at }}</span>
+                                                        <span class="time d-none d-sm-block"><i class="fas fa-clock"></i>
+                                                            Updated {{ $hasil->updated_at }}</span>
 
-                                                            <h3 class="timeline-header text-wrap">
-                                                                @if (auth()->user()->role == 'administrator')
-                                                                    <a href="#">{{ $hasil->instansi->name }} : </a>
-                                                                @endif
-                                                                
-                                                                <span style="font-weight: bold">
-                                                                    {{ $hasil->title }}</span>
-                                                                @if (trim($hasil->catatan) != '' or trim($hasil->note != ''))
-                                                                    <a href="#"
-                                                                        onclick="show_note('{{ $hasil->id }}')"
-                                                                        class="badge bg-warning btn-sm note my-1 p-1">
-                                                                        Catatan
+                                                        <h3 class="timeline-header text-wrap">
+                                                            @if (auth()->user()->role == 'administrator')
+                                                                <a href="#">{{ $hasil->instansi->name }} : </a>
+                                                            @endif
+
+                                                            <span style="font-weight: bold">
+                                                                {{ $hasil->title }}</span>
+                                                            @if (trim($hasil->catatan) != '' or trim($hasil->note != ''))
+                                                                <a href="#" onclick="show_note('{{ $hasil->id }}')"
+                                                                    class="badge bg-warning btn-sm note my-1 p-1">
+                                                                    Catatan
+                                                                </a>
+                                                            @endif
+                                                        </h3>
+
+                                                        <div class="timeline-body text-wrap">
+                                                            {!! str_replace('style', '', $hasil->description) !!}
+                                                            <br>
+                                                            <strong>Status Data :</strong>
+                                                            @if ($hasil->status == 1)
+                                                                Data Publik
+                                                            @else
+                                                                Data Private
+                                                            @endif
+                                                            <br>
+                                                            <strong>Tipe File :</strong> {!! $hasil->type !!}
+                                                        </div>
+                                                        <div class="timeline-footer">
+                                                            @if ($hasil->type == 'xls' or $hasil->type == 'xlsx')
+                                                                <a href="https://view.officeapps.live.com/op/embed.aspx?src={{ url('/file/' . $hasil->id . '/') }}"
+                                                                    target="_blank" style="border: none"
+                                                                    class="btn btn-info btn-sm my-1"><i
+                                                                        class="fas fa-binoculars"></i> View</a>
+                                                            @elseif ($hasil->type == 'csv' or $hasil->type == 'pdf')
+                                                                <a href="https://docs.google.com/gview?url={{ url('/file/' . $hasil->id) }}&embedded=true"
+                                                                    target="_blank" style="border: none"
+                                                                    class="btn btn-info btn-sm my-1"><i
+                                                                        class="fas fa-binoculars"></i> View</a>
+                                                            @endif
+
+                                                            <form class="d-inline"
+                                                                action="/file/{{ $hasil->id }}/{{ $hasil->title }}">
+                                                                {{ csrf_field() }}
+                                                                <button style="border: none" type="submit"
+                                                                    class="btn btn-success btn-sm my-1" name="download">
+                                                                    <i class="fas fa-cloud-download-alt"></i>
+                                                                    Download
+                                                                </button>
+                                                            </form>
+                                                            @if (auth()->user()->role == 'administrator')
+                                                                @if ($hasil->validasi == 3)
+                                                                    <a href="#" class="btn bg-primary btn-sm my-1"
+                                                                        onclick="show_verifikasi('{{ $hasil->id }}')">
+                                                                        <i class="fas fa-check"></i>
+                                                                        Validasi Ulang
+                                                                    </a>
+                                                                @else
+                                                                    <a href="#" class="btn bg-primary btn-sm my-1"
+                                                                        onclick="show_verifikasi('{{ $hasil->id }}')">
+                                                                        <i class="fas fa-check"></i>
+                                                                        Validasi
                                                                     </a>
                                                                 @endif
-                                                            </h3>
-
-                                                            <div class="timeline-body text-wrap">
-                                                                 {!! str_replace(array("style","width"),array("",""),$hasil->description) !!}
-                                                                <br>
-                                                                <strong>Status Data :</strong> 
-                                                                @if ($hasil->status==1)
-                                                                    Data Publik
+                                                            @elseif (auth()->user()->role == 'verifikator')
+                                                                @if ($hasil->verifikator == 3)
+                                                                    <a href="#" class="btn bg-primary btn-sm my-1"
+                                                                        onclick="show_verifikasi('{{ $hasil->id }}')">
+                                                                        <i class="fas fa-check"></i>
+                                                                        Verifikasi Ulang
+                                                                    </a>
                                                                 @else
-                                                                    Data Private
+                                                                    <a href="#" class="btn bg-primary btn-sm my-1"
+                                                                        onclick="show_verifikasi('{{ $hasil->id }}')">
+                                                                        <i class="fas fa-check"></i>
+                                                                        Verifikasi
+                                                                    </a>
                                                                 @endif
-                                                                <br>
-                                                                <strong>Tipe File :</strong> {!! $hasil->type !!}
-                                                            </div>
-                                                            <div class="timeline-footer">
-                                                                @if ($hasil->type == 'xls' or $hasil->type == 'xlsx')
-                                                                    <a href="https://view.officeapps.live.com/op/embed.aspx?src={{ url('/file/' . $hasil->id . '/') }}"
-                                                                        target="_blank" style="border: none"
-                                                                        class="btn btn-info btn-sm my-1"><i class="fas fa-binoculars"></i> View</a>
-                                                                @elseif ($hasil->type == 'csv' or $hasil->type == 'pdf')
-                                                                    <a href="https://docs.google.com/gview?url={{ url('/file/' . $hasil->id ) }}&embedded=true"
-                                                                        target="_blank" style="border: none"
-                                                                        class="btn btn-info btn-sm my-1"><i class="fas fa-binoculars"></i> View</a>
-                                                                @endif
-                                                                <form class="d-inline"
-                                                                    action="/file/{{ $hasil->id }}">
-                                                                    {{ csrf_field() }}
-                                                                    <button style="border: none" type="submit"
-                                                                        class="btn btn-success btn-sm my-1" name="download">
-                                                                        <i class="fas fa-cloud-download-alt"></i>
-                                                                        Download
-                                                                    </button>
-                                                                </form>
-                                                                @if (auth()->user()->role == 'administrator')
-                                                                    @if ($hasil->validasi == 3)
-                                                                        <a href="#" class="btn bg-primary btn-sm my-1"
-                                                                            onclick="show_verifikasi('{{ $hasil->id }}')">
-                                                                            <i class="fas fa-check"></i>
-                                                                            Validasi Ulang
-                                                                        </a>
-                                                                    @else
-                                                                        <a href="#" class="btn bg-primary btn-sm my-1"
-                                                                            onclick="show_verifikasi('{{ $hasil->id }}')">
-                                                                            <i class="fas fa-check"></i>
-                                                                            Validasi
-                                                                        </a>
-                                                                    @endif
-                                                                @elseif (auth()->user()->role == 'verifikator')
-                                                                    @if ($hasil->verifikator == 3)
-                                                                        <a href="#" class="btn bg-primary btn-sm my-1"
-                                                                            onclick="show_verifikasi('{{ $hasil->id }}')">
-                                                                            <i class="fas fa-check"></i>
-                                                                            Verifikasi Ulang
-                                                                        </a>
-                                                                    @else
-                                                                        <a href="#" class="btn bg-primary btn-sm my-1"
-                                                                            onclick="show_verifikasi('{{ $hasil->id }}')">
-                                                                            <i class="fas fa-check"></i>
-                                                                            Verifikasi
-                                                                        </a>
-                                                                    @endif
-                                                                @endif
-                                                            </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-    
-                            </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+
+                        </table>
                     </div>
                 </div>
             </div>
@@ -184,6 +186,7 @@
             $('.loading-simpan').attr('disabled', 'true');
             $('.spinner').show();
         });
+
         function show_verifikasi(id) {
             $.ajax({
                 type: "GET",

@@ -22,7 +22,7 @@
                     <div class="col-md-5">
                         <h5 class="card-title" style="color:#444444;font-weight: bold">
                             {{ $visual->title }}</h5>
-                        <p class="card-text">{!! str_replace("style","",$visual->deskripsi) !!}</p>
+                        <p class="card-text">{!! $visual->deskripsi !!}</p>
                     </div>
                 </div>
             </div>

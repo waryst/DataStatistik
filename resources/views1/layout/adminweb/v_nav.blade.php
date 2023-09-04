@@ -56,6 +56,18 @@
                                 </p>
                             </a>
                         </li>
+                        @if ($nav['iku'] > 0)
+                            <li class="nav-item ">
+                                <a href="{{ url('/iku') }}"
+                                    class="nav-link {{ request()->is('iku') ? 'active' : '' }}">
+                                    <i class=" fas fa-table"></i>
+                                    <p> Indikator Kinerja Utama
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+
+
                     @endif
                 </ul>
             </li>
@@ -91,10 +103,10 @@
                             <i class="fas fa-copy"></i>
                             <p>
                                 @if (auth()->user()->role == 'administrator')
-                                    Validasi Data                                    
+                                    Validasi Data
                                     <span class="badge badge-danger right">{{ $nav['jumlah_validasi_all'] }}</span>
                                 @elseif (auth()->user()->role == 'verifikator')
-                                    Varifikasi Data                                
+                                    Varifikasi Data
                                     <span class="badge badge-danger right">{{ $nav['jumlah_validasi_all'] }}</span>
                                 @endif
                             </p>
@@ -130,7 +142,7 @@
                         </li>
                     @elseif (auth()->user()->role == 'verifikator')
                         <li class="nav-item">
-                            <a href="{{ url('data_instansi/daftar_user/'.auth()->user()->instansi->name) }}"
+                            <a href="{{ url('data_instansi/daftar_user/' . auth()->user()->instansi->name) }}"
                                 class="nav-link {{ request()->is('data_instansi/*') ? 'active' : '' }}">
                                 <i class="fas fa-users"></i>
                                 <p>

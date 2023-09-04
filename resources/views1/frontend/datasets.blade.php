@@ -3,15 +3,19 @@
 @section('pageTitle', 'Data Statistik Sektoral Kabupaten Ponorogo')
 
 @section('content')
-<style>
-        .container{
+
+    <style>
+        .container {
+            font-family: Arial !important;
             font-size: 13px !important;
-            
+
         }
-        .card-body *{
+
+        .card-body * {
             font-weight: 400 !important;
         }
-              .border-radius-4 {
+
+        .border-radius-4 {
             border-radius: 0 !important;
         }
 
@@ -27,34 +31,21 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                @if ($instansi->logo == null)
-                                    <img src="{{ asset('logo.png') }}">
-                                @else
-                                    <img src="{{ url('image/logo/' . $instansi->id) }}" class="card-img-top">
-                                @endif
+                                <img src="{{ asset('logo.png') }}">
                                 <div class="mt-3">
-                                    <h5 class="mt-2">{{ $instansi->description }} </h5>
+                                    <h5 class="mt-2">Pemerintah Daerah Kabupaten Ponorogo</h5>
                                 </div>
                             </div>
-                        </div>
-                        <div class="border border-width-1 px-3 text-center" style="color: #777777;font-size: 13px">
-                            <span><i class="fas fa-map-marked-alt"> </i>
-                                {{ $instansi->alamat }}
-                            </span>
                         </div>
                     </div>
                     <div class="card mt-3">
                         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
                             style="height: 329px;">
-                            @if ($instansi->map == null)
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d505763.25984839204!2d111.24920809385759!3d-7.970457255833439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e790b859cfee851%3A0x3027a76e352bea0!2sKabupaten%20Ponorogo%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1610428936898!5m2!1sid!2sid"
-                                    width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
-                                    aria-hidden="false" tabindex="0">
-                                </iframe>
-                            @else
-                                {!! $instansi->map !!}
-                            @endif
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d505763.25984839204!2d111.24920809385759!3d-7.970457255833439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e790b859cfee851%3A0x3027a76e352bea0!2sKabupaten%20Ponorogo%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1610428936898!5m2!1sid!2sid"
+                                width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                                aria-hidden="false" tabindex="0">
+                            </iframe>
                         </div>
                     </div>
                     <div class="card mt-3" style="font-size: 13px">
@@ -81,9 +72,11 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div id="accordion" class="accordion-style01">
+                    <div id="accordion" class="accordion-style01 p-3">
                         <table id="tb_statistik" name="tb_statistik" class="table">
-                            @foreach ($datasets as $data)
+
+
+                            {{-- @foreach ($datasets as $data)
                                 <tr>
                                     <td class="p-0">
                                         <div class="card">
@@ -102,7 +95,7 @@
                                                 class="collapse {{ $loop->iteration > 1 ? '' : 'show' }} border border-width-3 border-radius-4 "
                                                 aria-labelledby="heading{{ $loop->iteration }}">
                                                 <div class="card-body">
-                                                    {!! str_replace("style","",$data->description) !!}
+                                                    {!! $data->description !!}
                                                     <div class="card  ">
                                                         <ul class="list-group list-group-flush"
                                                             style="color: #777777;font-size: 14px">
@@ -131,12 +124,12 @@
                                                                 <strong>Download : </strong>
                                                                 <span class="text-secondary">{{ $data->download }}</span>
                                                             </li>
+
                                                         </ul>
-                                                        <div class="card-body p-2">
+                                                        <div class="card-body p-2 border-1">
                                                             <div class="btn-group btn-group-sm" role="group"
                                                                 aria-label="Basic example">
-                                                                <form
-                                                                    action="/file/{{ $data->id }}">
+                                                                <form action="/file/{{ $data->id }}">
                                                                     <button type="submit"
                                                                         class="btn btn-danger">Download</button>
                                                                 </form>
@@ -153,14 +146,13 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @endforeach --}}
                         </table>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -195,3 +187,58 @@
     </script>
     @include('partials.mainfooter')
 @endsection
+@push('java')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(function() {
+                $('#tb_statistik').DataTable({
+                    paging: true,
+                    serverSide: true,
+                    processing: true,
+                    ajax: 'datasets/json',
+                    columns: [{
+                        data: 'admin',
+                        name: 'admin',
+                        sortable: false,
+                        searchable: false,
+                        orderable: false,
+                        render: function(data, type, row, meta) {
+                            var number = meta.row + meta.settings._iDisplayStart +
+                                1;
+                            return `
+                                <div class='card p-0'>
+                                    <div class='card-header m-0 p-0' id=heading'` + number + `'>
+                                        <div class='mb-0'>
+                                            <h5 class='btn btn-link collapsed py-0 m-0'
+                                                data-bs-toggle='collapse'
+                                                data-bs-target='#collapse` + number + `'
+                                                aria-expanded='true' aria-controls='collapse` + number + `'>
+                                                <span class="counts">` + number + `</span>
+                                                <span class='item-title'>` + data['judul'] + `</span>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div id='collapse` + number + `' class='collapse border border-width-3 border-radius-4 '
+                                        aria-labelledby='` + number + `'>
+                                        <div class='card-body'>
+                                            ` + data['description'] + ` 
+                                        </div>
+                                    </div
+
+
+
+
+                                </div>
+                            `;
+                        }
+                    }, {
+                        data: 'title',
+                        name: 'title',
+                        visible: false,
+                    }],
+
+                });
+            });
+        });
+    </script>
+@endpush

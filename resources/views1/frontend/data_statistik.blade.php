@@ -7,6 +7,9 @@
             <th>
                 Data Statistik
             </th>
+            <!-- <th class="text-center" style="width: 20px">
+                Upload
+            </th> -->
             <th class="text-center" style="width: 10px">
                 Action
             </th>

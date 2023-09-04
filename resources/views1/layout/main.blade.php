@@ -19,7 +19,6 @@
     <link rel="apple-touch-icon" href="{{ asset('assets') }}/img/logos/apple-touch-icon-57x57.png" />
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('assets') }}/img/logos/apple-touch-icon-72x72.png" />
     <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('assets') }}/img/logos/apple-touch-icon-114x114.png" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"></script>
     <link rel="stylesheet" href="{{ asset('assets') }}/css/dataTables.min.css" />
 
     <!-- plugins -->
@@ -30,8 +29,9 @@
 
     <!-- quform css -->
     <link rel="stylesheet" href="{{ asset('assets') }}/quform/css/base.css">
+
     <style>
-   
+
     </style>
 
     <!-- theme core css -->
@@ -92,7 +92,6 @@
                                                 </li>
                                             @endif
                                         @endauth
-                                         <li><a href="#" onclick="contact()">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -106,43 +105,10 @@
 
     </div>
 
-    
+
 
     @yield('content')
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-                <span><strong>Kontak</strong></span>
-                <div>
-                    <ul>
-                        <li>Jl. Ir. H Juanda No.198, Tonatan, Kec. Ponorogo, Kabupaten Ponorogo, Jawa Timur 63418</li>
-                        <li>Telp/Fax : 0352-3592999</li>
-                        <li>Email : <em>kominfo@ponorogo.go.id</em></li>
-                    </ul>
-                   
-                    <a href="https://google.com"  target="_blank" > </a>
-                    Ikuti Kami:
-                    <div>
-                        <a href="https://www.facebook.com/kominfopng" target="_blank"> <i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.twitter.com/kominfopng" target="_blank" class="mx-2"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.youtube.com/kominfopng" target="_blank" class=""><i class="fab fa-youtube"></i></a>
-                        <a href="https://www.instagram.com/kominfopng" target="_blank" class="mx-2"><i class="fab fa-instagram"></i></a>
-                    </div>
-                    <br>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d63235.675256577815!2d111.488111!3d-7.871016000000001!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x80bc599492cab4d5!2sDinas%20Komunikasi%20Informatika%20dan%20Statistik%20Ponorogo!5e0!3m2!1sid!2sid!4v1631684481191!5m2!1sid!2sid" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    <p>
-                </div>
-            </div>      
-        </div>
-    </div>
-    <script type="text/javascript">
-        function contact() {
-            
-         $("#exampleModal").modal('show');
-        }
-    
-    </script>
+
     <!-- ======= Footer ======= -->
 
     <a href="#!" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
@@ -175,7 +141,7 @@
     <!-- all js include end -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 
-
+    <link href="https://cdn.datatables.net/v/bs/dt-1.13.5/datatables.min.css" rel="stylesheet" />
     <script src="{{ asset('asset_adminweb') }}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{ asset('asset_adminweb') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="{{ asset('asset_adminweb') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>

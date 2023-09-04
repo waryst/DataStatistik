@@ -53,12 +53,7 @@ class VisualAdminController extends Controller
             }
         return redirect('/visualisasi_data')->with('toast_success','Berita Berhasil Dibuat');
     }
-    public function show($id){
-        $data['visual']=Visualisasi::find($id);
-        $data['nav'] =$this->getnav();
 
-        return view('adminweb.edit_visual',$data);
-    } 
     public function updatevisual(Request $request, Visualisasi $slug)
     {
       if($request->show=='show'){

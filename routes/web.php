@@ -100,8 +100,6 @@ Route::group(['middleware' => ['auth', 'checkRole:administrator,verifikator,admi
     Route::post('/data_instansi/edit_user/{id}', 'Adminweb\InstansiAdminController@edit_user_instansi');
     Route::post('/data_instansi/reset_user/{id}', 'Adminweb\InstansiAdminController@reset_user_instansi');
     Route::delete('/data_instansi/hapus_user/{id}', 'Adminweb\InstansiAdminController@hapus_user_instansi');
-    
-    Route::get('iku', 'Adminweb\IndikatorIkuController@data_iku');
 
 });
 
@@ -129,9 +127,9 @@ Route::group(['middleware' => ['auth', 'checkRole:administrator', 'revalidate']]
     Route::get('/visualisasi_data', 'Adminweb\VisualAdminController@data_visualisasi');
     Route::get('/visualisasi_data/create', 'Adminweb\VisualAdminController@createvisual');
     Route::post('/visualisasi_data/post', 'Adminweb\VisualAdminController@postvisual');
-    Route::get('/edit_visualisasi/{id}', 'Adminweb\VisualAdminController@show');
     Route::put('/visualisasi_data/{slug}', 'Adminweb\VisualAdminController@updatevisual');
     Route::delete('/visualisasi_data/{slug}', 'Adminweb\VisualAdminController@destroy');
+    
     Route::resource('/indikator', 'Adminweb\IndikatorIkuController');
     Route::post('/saveindikator', 'Adminweb\IndikatorIkuController@saveindikator');
     Route::post('/editindikator/{id}', 'Adminweb\IndikatorIkuController@editindikator');

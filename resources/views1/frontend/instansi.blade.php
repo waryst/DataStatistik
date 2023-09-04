@@ -3,15 +3,18 @@
 @section('pageTitle', 'Data Statistik Sektoral Kabupaten Ponorogo')
 
 @section('content')
-<style>
-        .container{
+    <style>
+        .container {
+            font-family: Arial !important;
             font-size: 13px !important;
-            
+
         }
-        .card-body *{
+
+        .card-body * {
             font-weight: 400 !important;
         }
-              .border-radius-4 {
+
+        .border-radius-4 {
             border-radius: 0 !important;
         }
 
@@ -102,7 +105,7 @@
                                                 class="collapse {{ $loop->iteration > 1 ? '' : 'show' }} border border-width-3 border-radius-4 "
                                                 aria-labelledby="heading{{ $loop->iteration }}">
                                                 <div class="card-body">
-                                                    {!! str_replace("style","",$data->description) !!}
+                                                    {!! $data->description !!}
                                                     <div class="card  ">
                                                         <ul class="list-group list-group-flush"
                                                             style="color: #777777;font-size: 14px">
@@ -135,8 +138,7 @@
                                                         <div class="card-body p-2">
                                                             <div class="btn-group btn-group-sm" role="group"
                                                                 aria-label="Basic example">
-                                                                <form
-                                                                    action="/file/{{ $data->id }}">
+                                                                <form action="/file/{{ $data->id }}">
                                                                     <button type="submit"
                                                                         class="btn btn-danger">Download</button>
                                                                 </form>

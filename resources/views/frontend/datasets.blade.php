@@ -5,16 +5,13 @@
 @section('content')
 
     <style>
-        .container {
-            font-family: Arial !important;
+        .container{
             font-size: 13px !important;
-
+            
         }
-
-        .card-body * {
+        .card-body *{
             font-weight: 400 !important;
         }
-
         .border-radius-4 {
             border-radius: 0 !important;
         }
@@ -23,6 +20,7 @@
             border: 1px solid rgb(222, 226, 230) !important;
             margin-bottom: 10px;
         }
+
     </style>
     <section>
         <div class="container lg-container mb-5">
@@ -72,87 +70,16 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div id="accordion" class="accordion-style01 p-3">
+                    <div id="accordion" class="accordion-style01">
                         <table id="tb_statistik" name="tb_statistik" class="table">
-
-
-                            {{-- @foreach ($datasets as $data)
-                                <tr>
-                                    <td class="p-0">
-                                        <div class="card">
-                                            <div class="card-header" id="heading{{ $loop->iteration }}">
-                                                <div class="mb-0">
-                                                    <h5 class="btn btn-link {{ $loop->iteration > 1 ? 'collapsed' : '' }}"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#collapse{{ $loop->iteration }}"
-                                                        aria-expanded="true" aria-controls="collapse{{ $loop->iteration }}">
-                                                        <span class="counts">{{ $loop->iteration }}</span>
-                                                        <span class="item-title"> {{ strtoupper($data->title) }}</span>
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                            <div id="collapse{{ $loop->iteration }}"
-                                                class="collapse {{ $loop->iteration > 1 ? '' : 'show' }} border border-width-3 border-radius-4 "
-                                                aria-labelledby="heading{{ $loop->iteration }}">
-                                                <div class="card-body">
-                                                    {!! $data->description !!}
-                                                    <div class="card  ">
-                                                        <ul class="list-group list-group-flush"
-                                                            style="color: #777777;font-size: 14px">
-                                                            <li class="list-group-item p-1"><strong>Author : </strong>
-                                                                <span class="text-secondary"> Admin
-                                                                    {{ $data->instansi->name }}
-                                                                </span>
-                                                            </li>
-                                                            <li class="list-group-item p-1"><strong>Organisasi : </strong>
-                                                                <span
-                                                                    class="text-secondary">{{ $data->instansi->description }}</span>
-                                                            </li>
-                                                            <li class="list-group-item p-1"><strong>Created :</strong>
-                                                                <span
-                                                                    class="text-secondary">{{ date('d F Y  h:m:s', strtotime($data->created_at)) }}</span>
-                                                            </li>
-                                                            <li class="list-group-item p-1"><strong>Last Update :</strong>
-                                                                <span
-                                                                    class="text-secondary">{{ date('d F Y  h:m:s', strtotime($data->updated_at)) }}</span>
-                                                            </li>
-                                                            <li class="list-group-item p-1"><strong>File Type : </strong>
-                                                                <span class="text-secondary">{{ $data->type }}</span>
-                                                            </li>
-                                                            <li class="list-group-item p-1"><strong>Viewer : </strong>
-                                                                <span class="text-secondary">{{ $data->view }}</span> |
-                                                                <strong>Download : </strong>
-                                                                <span class="text-secondary">{{ $data->download }}</span>
-                                                            </li>
-
-                                                        </ul>
-                                                        <div class="card-body p-2 border-1">
-                                                            <div class="btn-group btn-group-sm" role="group"
-                                                                aria-label="Basic example">
-                                                                <form action="/file/{{ $data->id }}">
-                                                                    <button type="submit"
-                                                                        class="btn btn-danger">Download</button>
-                                                                </form>
-                                                                <button type="button" class="btn btn-warning"
-                                                                    data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                                    data-title="{{ $data->title }}"
-                                                                    data-resource="{{ $data->id }}">Views</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach --}}
+                      
                         </table>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -196,49 +123,29 @@
                     serverSide: true,
                     processing: true,
                     ajax: 'datasets/json',
-                    columns: [{
-                        data: 'admin',
-                        name: 'admin',
-                        sortable: false,
-                        searchable: false,
-                        orderable: false,
-                        render: function(data, type, row, meta) {
-                            var number = meta.row + meta.settings._iDisplayStart +
-                                1;
-                            return `
-                                <div class='card p-0'>
-                                    <div class='card-header m-0 p-0' id=heading'` + number + `'>
-                                        <div class='mb-0'>
-                                            <h5 class='btn btn-link collapsed py-0 m-0'
-                                                data-bs-toggle='collapse'
-                                                data-bs-target='#collapse` + number + `'
-                                                aria-expanded='true' aria-controls='collapse` + number + `'>
-                                                <span class="counts">` + number + `</span>
-                                                <span class='item-title'>` + data['judul'] + `</span>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div id='collapse` + number + `' class='collapse border border-width-3 border-radius-4 '
-                                        aria-labelledby='` + number + `'>
-                                        <div class='card-body'>
-                                            ` + data['description'] + ` 
-                                        </div>
-                                    </div
-
-
-
-
-                                </div>
-                            `;
-                        }
-                    }, {
+                    columns: [ {
                         data: 'title',
                         name: 'title',
                         visible: false,
-                    }],
-
+                    }, {
+                        data: 'opsi',
+                        name: 'opsi'
+                    }, ],
                 });
             });
+                // $('#tb_statistik').DataTable({
+                //     "paging": true,
+                //     "lengthChange": true,
+                //     "searching": true,
+                //     "ordering": false,
+                //     "columnDefs": [{
+                //         "targets": [0], //first column / numbering column
+                //         "orderable": false, //set not orderable
+                //     }, ],
+                //     "info": true,
+                //     "autoWidth": true,
+                //     "responsive": true,
+                // });
         });
     </script>
 @endpush

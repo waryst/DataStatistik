@@ -1,6 +1,6 @@
 @extends('layout.adminweb.index')
 
-@section('title', 'Data IKU dan IKD')
+@section('title', 'Data Instansi')
 @push('css')
     <style>
         .loading-simpan-ikd {
@@ -10,6 +10,7 @@
 @endpush
 @section('content')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -260,7 +261,6 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                
                 $.ajax({
                     type: "POST",
                     url: "{{ url('saveindikator') }}",
@@ -367,8 +367,8 @@
             var fd = new FormData();
             fd.append('editindikator', editindikator);
             $.ajaxSetup({
-                    headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
             $.ajax({

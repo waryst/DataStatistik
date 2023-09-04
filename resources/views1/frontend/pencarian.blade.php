@@ -15,6 +15,7 @@
                             <th class="text-center" style="width: 5%">#</th>
                             <th style="width: 15%">Instansi</th>
                             <th> Deskripsi</th>
+                            <!--<th class="text-center" style="width: 20%"> Update</th> -->
                             <th> Action</th>
                         </tr>
                     </thead>

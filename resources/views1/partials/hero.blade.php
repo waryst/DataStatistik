@@ -8,12 +8,12 @@
                 <div class="header-text w-100 w-md-95 mx-auto ms-lg-0 text-center text-lg-start">
                     <h1 class="wow fadeInUp" data-wow-delay=".1s">Data <strong class="font-weight-600">Statistik</strong>
                         Kabupaten Ponorogo</h1>
-                    <p class="wow fadeInUp w-95 w-md-80 mx-auto ms-lg-0 font-weight-bold" data-wow-delay=".2s">Data Statistik
+                    <p class="wow fadeInUp w-95 w-md-80 mx-auto ms-lg-0" data-wow-delay=".2s">Data Statistik
                         adalah
                         data yang dikumpulkan, diolah, dan disajikan yang bertujuan untuk memperoleh informasi
                     </p>
-                    <div class="wow fadeInUp float-end mx-12"  data-wow-delay=".4s"><a href="https://dashboard.ponorogo.go.id/petunjuk.pptx"
-                            class="btn btn-warning mx-auto font-weight-bold">Download Petunjuk Penggunaan</a>
+                    <div class="wow fadeInUp" data-wow-delay=".4s"><a href="#!"
+                            class="btn btn-outline-primary">Get Started</a>
                     </div>
                 </div>
             </div>
