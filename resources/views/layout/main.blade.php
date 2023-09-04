@@ -159,20 +159,6 @@
                     "autoWidth": false,
                     "responsive": true,
                 });
-                // $('#tb_statistik').DataTable({
-
-                // "paging": true,
-                // "lengthChange": true,
-                // "searching": true,
-                // "ordering": false,
-                // "columnDefs": [{
-                // "targets": [0], //first column / numbering column
-                // "orderable": false, //set not orderable
-                // }, ],
-                // "info": true,
-                // "autoWidth": true,
-                // "responsive": true,
-                // });
             });
         });
     </script>

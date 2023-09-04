@@ -14,9 +14,10 @@ trait GetNavTraits
             $data['jumlah_validasi'] = DataStatistik::where([['instansi_id', $id_instansi],['verifikator','1'],['validasi','0']])->count();
             $data['jumlah_note'] = DataStatistik::where([['instansi_id', $id_instansi],['verifikator','1'],['validasi','2']])->count();
             $data['jumlah_validasi_ulang'] = DataStatistik::where([['instansi_id', $id_instansi],['verifikator','1'],['validasi','3']])->count();
-            $data['jumlah_validasi_all'] = DataStatistik::where('verifikator',1)->whereIN('validasi',[0,3])->count();  
+            $data['jumlah_validasi_all'] = DataStatistik::where('verifikator',1)->whereIN('validasi',[0,3])->count();
             $data['data_valid'] = DataStatistik::where('validasi',1)->count();  
             $data['data_unverified'] = DataStatistik::whereIN('verifikator',[0,3])->count();  
+
         }
         elseif (auth()->user()->role == 'verifikator' or auth()->user()->role == 'admin'){
             $data['jumlah_validasi'] = DataStatistik::where([['instansi_id', $id_instansi],['verifikator','0']])->count()+DataStatistik::where([['instansi_id', $id_instansi],['verifikator','1'],['validasi','0']])->count();

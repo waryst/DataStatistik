@@ -4,8 +4,9 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Indikator extends Model
+class Ikd extends Model
 {
-    protected $table  = "indikator";
+    protected $table  = "master_ikd";
     protected $guarded  = ['id'];
+    public $timestamps = false;
 }

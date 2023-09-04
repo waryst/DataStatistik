@@ -56,6 +56,18 @@
                                 </p>
                             </a>
                         </li>
+                        @if ($nav['iku'] > 0)
+                            <li class="nav-item ">
+                                <a href="{{ url('/iku') }}"
+                                    class="nav-link {{ request()->is('iku') ? 'active' : '' }}">
+                                    <i class=" fas fa-table"></i>
+                                    <p> Indikator Kinerja Utama
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+
+
                     @endif
                 </ul>
             </li>

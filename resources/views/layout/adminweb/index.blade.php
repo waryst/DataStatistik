@@ -10,7 +10,7 @@
     <title>SatuData | @yield('title')</title>
 
     <!-- Google Font: Source Sans Pro -->
-        
+
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -37,7 +37,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"
         integrity="sha256-CgvH7sz3tHhkiVKh05kSUgG97YtzYNnWt6OXcmYzqHY=" crossorigin="anonymous"></script>
 
-
+    @stack('css')
 
     <style>
         iframe {
@@ -54,8 +54,9 @@
         .loading,
         .loading-simpan,
         .loading-update,
-        .loading-hapus {
-            display: none;
+        .loading-hapus,
+        {
+        display: none;
         }
     </style>
     <SCRIPT language=Javascript>

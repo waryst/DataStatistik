@@ -197,9 +197,45 @@
                     processing: true,
                     ajax: 'datasets/json',
                     columns: [{
-                        data: 'opsi',
-                        name: 'opsi'
-                    }, ],
+                        data: 'admin',
+                        name: 'admin',
+                        sortable: false,
+                        searchable: false,
+                        orderable: false,
+                        render: function(data, type, row, meta) {
+                            var number = meta.row + meta.settings._iDisplayStart +
+                                1;
+                            return `
+                                <div class='card p-0'>
+                                    <div class='card-header m-0 p-0' id=heading'` + number + `'>
+                                        <div class='mb-0'>
+                                            <h5 class='btn btn-link collapsed py-0 m-0'
+                                                data-bs-toggle='collapse'
+                                                data-bs-target='#collapse` + number + `'
+                                                aria-expanded='true' aria-controls='collapse` + number + `'>
+                                                <span class="counts">` + number + `</span>
+                                                <span class='item-title'>` + data['judul'] + `</span>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div id='collapse` + number + `' class='collapse border border-width-3 border-radius-4 '
+                                        aria-labelledby='` + number + `'>
+                                        <div class='card-body'>
+                                            ` + data['description'] + ` 
+                                        </div>
+                                    </div
+
+
+
+
+                                </div>
+                            `;
+                        }
+                    }, {
+                        data: 'title',
+                        name: 'title',
+                        visible: false,
+                    }],
 
                 });
             });

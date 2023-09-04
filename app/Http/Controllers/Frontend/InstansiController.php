@@ -65,84 +65,90 @@ class InstansiController extends Controller
         $query= DataStatistik::latest()->where('status',1)->where('validasi',1)->where('verifikator',1);
         return DataTables::of($query)
 
-            ->addColumn('opsi',function($data,$no=1){
-                    return "
-                    <div class='card'>
-                        <div class='card-header' id='$data->id'>
-                            <div class='mb-0'>
-                                <h5 class='btn btn-link'
-                                    data-bs-toggle='collapse'
-                                    data-bs-target='#collapse$data->id'
-                                    aria-expanded='true' aria-controls='collapse$data->id'>
-                                    <span class='item-title'>".strtoupper($data->title)."</span>
-                                </h5>
-                            </div>
-                        </div>
-                        <div id='collapse$data->id' class='collapse border border-width-3 border-radius-4 '
-                        aria-labelledby='$data->id'>
-                            <div class='card-body'>
-                            ".$data->description ."
-                                <div class='card'>
-                                    <ul class='list-group list-group-flush'
-                                    style='color: #777777;font-size: 14px'>
-                                        <li class='list-group-item p-1'>
-                                            <strong>Author : </strong>
-                                            <span class='text-secondary'>
-                                                Admin ".$data->instansi->name."
-                                            </span>
-                                         </li>
-                                         <li class='list-group-item p-1'><strong>Organisasi : </strong>
-                                            <span class='text-secondary'>"
-                                                .$data->instansi->description."
-                                            </span>
-                                        </li>
-                                        <li class='list-group-item p-1'>
-                                            <strong>Created :</strong>
-                                            <span class='text-secondary'>
-                                                ".date('d F Y  h:m:s', strtotime($data->created_at))."
-                                            </span>
-                                        </li>
-                                        <li class='list-group-item p-1'>
-                                            <strong>Last Update :</strong>
-                                            <span  class='text-secondary'>
-                                                ".date('d F Y  h:m:s', strtotime($data->updated_at))."
-                                            </span>
-                                        </li>
-                                        <li class='list-group-item p-1'>
-                                            <strong>File Type : </strong>
-                                            <span class='text-secondary'>".$data->type."</span>
-                                        </li>
-                                        <li class='list-group-item p-1'>
-                                            <strong>Viewer : </strong>
-                                            <span class='text-secondary'>$data->view</span> |
-                                            <strong>Download : </strong>
-                                            <span class='text-secondary'>$data->download</span>
-                                        </li>
-                                    </ul>
-                                    <div class='card-body p-2 border-1'>
-                                        <div class='btn-group btn-group-sm' role='group' aria-label='Basic example'>
-                                                                <form action='/file/". $data->id ."'>
-                                                                    <button type='submit'
-                                                                        class='btn btn-danger'>Download</button>
-                                                                </form>
-                                                                <button type='button' class='btn btn-warning'
-                                                                    data-bs-toggle='modal' data-bs-target='#exampleModal'
-                                                                    data-title='$data->title '
-                                                                    data-resource=".$data->id.">Views</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>";
-                    $no++;
-                })
-                ->rawColumns(['opsi'])
+            ->editColumn('admin',function($data){
+                $data=[
+                    'judul'=>$data->title,
+                    'description'=> $data->description
+                ];
+
+                    return $data;
+            })
+            ->editColumn('title',function($data){
+                return $data->title;
+        })
+            // ->addColumn('opsi',function($data){
+            //         // return 'DT_RowIndex'."
+            //         // <div class='card'>
+            //         //     <div class='card-header' id='$data->id'>
+            //         //         <div class='mb-0'>
+            //         //             <h5 class='btn btn-link collapsed'
+            //         //                 data-bs-toggle='collapse'
+            //         //                 data-bs-target='#collapse$data->id'
+            //         //                 aria-expanded='true' aria-controls='collapse$data->id'>
+            //         //                 <span class='item-title'>".strtoupper($data->title)."</span>
+            //         //             </h5>
+            //         //         </div>
+            //         //     </div>
+            //         //     <div id='collapse$data->id' class='collapse border border-width-3 border-radius-4 '
+            //         //     aria-labelledby='$data->id'>
+            //         //         <div class='card-body'>
+            //         //         ".$data->description ."
+            //         //             <div class='card'>
+            //         //                 <ul class='list-group list-group-flush'
+            //         //                 style='color: #777777;font-size: 14px'>
+            //         //                     <li class='list-group-item p-1'>
+            //         //                         <strong>Author : </strong>
+            //         //                         <span class='text-secondary'>
+            //         //                             Admin ".$data->instansi->name."
+            //         //                         </span>
+            //         //                      </li>
+            //         //                      <li class='list-group-item p-1'><strong>Organisasi : </strong>
+            //         //                         <span class='text-secondary'>"
+            //         //                             .$data->instansi->description."
+            //         //                         </span>
+            //         //                     </li>
+            //         //                     <li class='list-group-item p-1'>
+            //         //                         <strong>Created :</strong>
+            //         //                         <span class='text-secondary'>
+            //         //                             ".date('d F Y  h:m:s', strtotime($data->created_at))."
+            //         //                         </span>
+            //         //                     </li>
+            //         //                     <li class='list-group-item p-1'>
+            //         //                         <strong>Last Update :</strong>
+            //         //                         <span  class='text-secondary'>
+            //         //                             ".date('d F Y  h:m:s', strtotime($data->updated_at))."
+            //         //                         </span>
+            //         //                     </li>
+            //         //                     <li class='list-group-item p-1'>
+            //         //                         <strong>File Type : </strong>
+            //         //                         <span class='text-secondary'>".$data->type."</span>
+            //         //                     </li>
+            //         //                     <li class='list-group-item p-1'>
+            //         //                         <strong>Viewer : </strong>
+            //         //                         <span class='text-secondary'>$data->view</span> |
+            //         //                         <strong>Download : </strong>
+            //         //                         <span class='text-secondary'>$data->download</span>
+            //         //                     </li>
+            //         //                 </ul>
+            //         //                 <div class='card-body p-2 border-1'>
+            //         //                     <div class='btn-group btn-group-sm' role='group' aria-label='Basic example'>
+            //         //                                             <form action='/file/". $data->id ."'>
+            //         //                                                 <button type='submit'
+            //         //                                                     class='btn btn-danger'>Download</button>
+            //         //                                             </form>
+            //         //                                             <button type='button' class='btn btn-warning'
+            //         //                                                 data-bs-toggle='modal' data-bs-target='#exampleModal'
+            //         //                                                 data-title='$data->title '
+            //         //                                                 data-resource=".$data->id.">Views</button>
+            //         //                     </div>
+            //         //                 </div>
+            //         //             </div>
+            //         //         </div>
+            //         //     </div>
+            //         // </div>";
+            //     })
+            //     ->rawColumns(['opsi'])
                 ->make(true);
-                $data['keterangan'] = 'semua';
-                return view('frontend.datasets',$data);
-        $query= (DataStatistik::limit(10))->make(true);
-        // return DataTables::of(DataStatistik::limit(10))->make(true);
     }
     public function datapublikasi()
     {
